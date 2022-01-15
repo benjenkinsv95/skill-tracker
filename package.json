@@ -1,6 +1,6 @@
 {
-  "homepage": "https://git-name.github.io/repo-name",
-  "name": "react-auth-template",
+  "homepage": "https://benjenkinsv95.github.io/skill-tracker",
+  "name": "skill-tracker",
   "version": "0.1.0",
   "private": true,
   "dependencies": {

@@ -6,6 +6,7 @@ import { signUpSuccess, signUpFailure } from '../AutoDismissAlert/messages'
 
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
+import heroStyles from '../../styles/heroStyles'
 
 const SignUp = ({ msgAlert, setUser }) => {
   const [email, setEmail] = useState('')
@@ -43,7 +44,7 @@ const SignUp = ({ msgAlert, setUser }) => {
   }
 
   return (
-    <div className='row'>
+    <div style={heroStyles} className='row'>
       <div className='col-sm-10 col-md-8 mx-auto mt-5'>
         <h3>Sign Up</h3>
         <Form onSubmit={onSignUp}>
@@ -80,7 +81,7 @@ const SignUp = ({ msgAlert, setUser }) => {
               onChange={event => setPasswordConfirmation(event.target.value)}
             />
           </Form.Group>
-          <Button className='mt-2' variant='primary' type='submit'>Submit</Button>
+          <Button className='mt-2' variant='dark' type='submit'>Submit</Button>
         </Form>
       </div>
     </div>
