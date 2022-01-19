@@ -36,7 +36,7 @@ const ChangePassword = ({ msgAlert, user }) => {
   }
 
   if (!user || shouldNavigate) {
-    return <Navigate to='/' />
+    return <Navigate to='/my-skills' />
   }
 
   return (

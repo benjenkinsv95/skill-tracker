@@ -8,7 +8,7 @@ import heroStyles from '../../styles/heroStyles'
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
 
-const SignIn = ({ msgAlert, setUser }) => {
+const SignIn = ({ msgAlert, setUser, user }) => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [shouldNavigate, setShouldNavigate] = useState(false)
@@ -19,6 +19,8 @@ const SignIn = ({ msgAlert, setUser }) => {
     try {
       const res = await signIn(email, password)
       setUser(res.data.user)
+      // eslint-disable-next-line no-undef
+      localStorage.setItem('user', JSON.stringify(res.data.user))
 
       msgAlert({
         heading: 'Sign In Success',
@@ -37,8 +39,8 @@ const SignIn = ({ msgAlert, setUser }) => {
     }
   }
 
-  if (shouldNavigate) {
-    return <Navigate to='/' />
+  if (shouldNavigate || user) {
+    return <Navigate to='/my-skills' />
   }
 
   return (

@@ -1,8 +1,11 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { Link, Navigate } from 'react-router-dom'
 import heroStyles from '../styles/heroStyles'
 
-const Home = () => {
+const Home = ({ user }) => {
+  if (user) {
+    return <Navigate to="my-skills" />
+  }
   return (
     <div style={heroStyles}>
       <h1>Skill Tracker</h1>

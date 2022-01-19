@@ -10,9 +10,16 @@ import SignIn from './components/auth/SignIn'
 import SignOut from './components/auth/SignOut'
 import ChangePassword from './components/auth/ChangePassword'
 import UnauthenticatedHome from './components/UnauthenticatedHome'
+import MySkills from './components/skills/MySkills'
+
+const loadUser = () => {
+  // eslint-disable-next-line no-undef
+  const user = localStorage.getItem('user')
+  return user ? JSON.parse(user) : null
+}
 
 const App = () => {
-  const [user, setUser] = useState(null)
+  const [user, setUser] = useState(loadUser())
   const [msgAlerts, setMsgAlerts] = useState([])
 
   const clearUser = () => setUser(null)
@@ -38,11 +45,11 @@ const App = () => {
         <Routes>
           <Route
             path='/sign-up'
-            element={<SignUp msgAlert={msgAlert} setUser={setUser} /> }
+            element={<SignUp msgAlert={msgAlert} user={user} setUser={setUser} /> }
           />
           <Route
             path='/sign-in'
-            element={<SignIn msgAlert={msgAlert} setUser={setUser} /> }
+            element={<SignIn msgAlert={msgAlert} user={user} setUser={setUser} /> }
           />
           <Route
             path='/sign-out'
@@ -54,7 +61,11 @@ const App = () => {
           />
           <Route
             path='/'
-            element={<UnauthenticatedHome />}
+            element={<UnauthenticatedHome user={user} />}
+          />
+          <Route
+            path='/my-skills'
+            element={<MySkills msgAlert={msgAlert} user={user} />}
           />
         </Routes>
       </main>
