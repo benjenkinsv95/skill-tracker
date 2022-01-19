@@ -51,7 +51,7 @@ const MySkills = ({ user, msgAlert }) => {
   } else {
     practiceJSX = (
       <div className='row'>
-        {practices.map(({ _id, skill, daysStreak }) => (
+        {practices.map(({ _id, skill, daysStreak, daysSinceStreak }) => (
           <div className='col-md-6 col-lg-4 mb-4' key={_id}>
             <Card className='text-center' bg='dark' text='white'>
               <Card.Body>
@@ -71,7 +71,9 @@ const MySkills = ({ user, msgAlert }) => {
                 )}
 
               </Card.Body>
-              <Card.Footer className='text-muted'>{daysStreak} day practice streak 🔥</Card.Footer>
+              <Card.Footer className={daysStreak === 0 ? 'text-danger' : (daysSinceStreak === 0 ? 'text-primary' : 'text-white')}>{daysStreak > 0 && <>{daysStreak} day practice streak 🔥</>}
+                {daysStreak === 0 && <>{daysSinceStreak} days since last streak 🛑</>}
+              </Card.Footer>
             </Card>
           </div>
         ))}
