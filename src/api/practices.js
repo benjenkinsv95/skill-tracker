@@ -11,7 +11,7 @@ export const getMyPractices = async (user) => {
 
   // sort the practices by the `virtual` daysStreak
   // since it is a virtual, we can't use `sort` in mongoose
-  res.data.practices.sort((a, b) => a.daysStreak - b.daysStreak)
+  res.data.practices.sort((a, b) => a.daysStreak - b.daysStreak || b.daysSinceStreak - a.daysSinceStreak)
 
   // then pass along the sorted data
   return Promise.resolve({ ...res })
