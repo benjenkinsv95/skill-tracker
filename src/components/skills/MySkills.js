@@ -14,27 +14,28 @@ const MySkills = ({ user, msgAlert }) => {
     return <Navigate to="/sign-in" />
   }
 
-  useEffect(() => {
-    const fetchPractices = async () => {
-      try {
-        const res = await getMyPractices(user)
-        setPractices(res.data.practices)
-      } catch (error) {
-        console.error('Failed to load practices', error)
-        msgAlert({
-          heading: 'Failed to load practices',
-          message: 'Try again later',
-          variant: 'danger'
-        })
-      }
+  const fetchPractices = async () => {
+    try {
+      const res = await getMyPractices(user)
+      setPractices(res.data.practices)
+    } catch (error) {
+      console.error('Failed to load practices', error)
+      msgAlert({
+        heading: 'Failed to load practices',
+        message: 'Try again later',
+        variant: 'danger'
+      })
     }
+  }
 
+  useEffect(() => {
     fetchPractices()
   }, [])
 
-  const handlePracticeClick = (id) => {
+  const handlePracticeClick = async (id) => {
     console.log('practice clicked')
-    markPractice(id, user)
+    await markPractice(id, user)
+    fetchPractices()
   }
 
   let practiceJSX
