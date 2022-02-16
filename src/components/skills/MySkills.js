@@ -7,6 +7,14 @@ import Card from 'react-bootstrap/Card'
 import Spinner from 'react-bootstrap/Spinner'
 import { gradientStyles } from '../../styles/heroStyles'
 
+const isToday = (dateString) => {
+  const someDate = new Date(dateString)
+  const today = new Date()
+  return someDate.getDate() === today.getDate() &&
+    someDate.getMonth() === today.getMonth() &&
+    someDate.getFullYear() === today.getFullYear()
+}
+
 const MySkills = ({ user, msgAlert }) => {
   const [practices, setPractices] = useState(null)
 
@@ -52,7 +60,7 @@ const MySkills = ({ user, msgAlert }) => {
   } else {
     practiceJSX = (
       <div className='row'>
-        {practices.map(({ _id, skill, daysStreak, daysSinceStreak }) => (
+        {practices.map(({ _id, skill, daysStreak, daysSinceStreak, lastPracticed }) => (
           <div className='col-md-6 col-lg-4 mb-4' key={_id}>
             <Card className='text-center' bg='dark' text='white'>
               <Card.Body>
@@ -72,8 +80,11 @@ const MySkills = ({ user, msgAlert }) => {
                 )}
 
               </Card.Body>
-              <Card.Footer className={daysStreak === 0 ? 'text-danger' : (daysSinceStreak === 0 ? 'text-primary' : 'text-white')}>{daysStreak > 0 && <>{daysStreak} day practice streak 🔥</>}
+              <Card.Footer className={daysStreak === 0 ? 'text-danger' : (isToday(lastPracticed) ? 'text-success' : 'text-white')}>{daysStreak > 0 && <>{daysStreak} day practice streak 🔥</>}
                 {daysStreak === 0 && <>{daysSinceStreak} days since last streak 🛑</>}
+                <div>
+                  {isToday(lastPracticed)}
+                </div>
               </Card.Footer>
             </Card>
           </div>
