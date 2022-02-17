@@ -1,7 +1,7 @@
 let apiUrl
 const apiUrls = {
-  production: 'https://aqueous-atoll-85096.herokuapp.com',
-  development: 'http://localhost:4741'
+  production: 'https://limitless-castle-29876.herokuapp.com/skill-tracker',
+  development: 'http://localhost:4741/skill-tracker'
 }
 
 if (window.location.hostname === 'localhost') {
