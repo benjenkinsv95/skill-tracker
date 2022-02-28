@@ -60,8 +60,8 @@ const MySkills = ({ user, msgAlert }) => {
   } else {
     practiceJSX = (
       <div className='row'>
-        {practices.map(({ _id, skill, daysStreak, daysSinceStreak, lastPracticed }) => (
-          <div className='col-md-6 col-lg-4 mb-4' key={_id}>
+        {practices.map(({ id, skill, streakInDays, daysSinceStreak, lastPracticed }) => (
+          <div className='col-md-6 col-lg-4 mb-4' key={id}>
             <Card className='text-center' bg='dark' text='white'>
               <Card.Body>
                 <Card.Title>{skill.name}</Card.Title>
@@ -73,15 +73,15 @@ const MySkills = ({ user, msgAlert }) => {
                 )}
                 {skill.practiceUrl && (
                   <a href={skill.practiceUrl} target='_blank' rel="noreferrer">
-                    <Button variant='secondary' size='lg' onClick={() => handlePracticeClick(_id)}>
+                    <Button variant='secondary' size='lg' onClick={() => handlePracticeClick(id)}>
                         Practice
                     </Button>
                   </a>
                 )}
 
               </Card.Body>
-              <Card.Footer className={daysStreak === 0 ? 'text-danger' : (isToday(lastPracticed) ? 'text-success' : 'text-white')}>{daysStreak > 0 && <>{daysStreak} day practice streak 🔥</>}
-                {daysStreak === 0 && <>{daysSinceStreak} days since last streak 🛑</>}
+              <Card.Footer className={streakInDays === 0 ? 'text-danger' : (isToday(lastPracticed) ? 'text-success' : 'text-white')}>{streakInDays > 0 && <>{streakInDays} day practice streak 🔥</>}
+                {streakInDays === 0 && <>{daysSinceStreak} days since last streak 🛑</>}
                 <div>
                   {isToday(lastPracticed)}
                 </div>
